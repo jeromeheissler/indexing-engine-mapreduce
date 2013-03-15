@@ -1,4 +1,4 @@
-package fr.univtours.polytech.indexing_engine_mapreduce;
+package fr.univtours.polytech.maxtemperature;
 
 // cc MaxTemperatureReducer Reducer for maximum temperature example
 // cc MaxTemperatureReducer2 Reducer for maximum temperature example

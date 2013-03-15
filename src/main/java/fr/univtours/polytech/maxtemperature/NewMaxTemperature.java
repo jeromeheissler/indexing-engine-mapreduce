@@ -1,4 +1,4 @@
-package fr.univtours.polytech.indexing_engine_mapreduce;
+package fr.univtours.polytech.maxtemperature;
 
 // cc NewMaxTemperature Application to find the maximum temperature in the weather dataset using the new context objects MapReduce API
 import java.io.IOException;

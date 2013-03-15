@@ -1,4 +1,4 @@
-package fr.univtours.polytech.indexing_engine_mapreduce;
+package fr.univtours.polytech.maxtemperature;
 
 // cc MaxTemperature Application to find the maximum temperature in the weather dataset
 // vv MaxTemperature
@@ -12,7 +12,7 @@ import org.apache.hadoop.mapred.FileOutputFormat;
 import org.apache.hadoop.mapred.JobClient;
 import org.apache.hadoop.mapred.JobConf;
 
-public class MaxTemperatureWithCombiner {
+public class MaxTemperature {
 
   public static void main(String[] args) throws IOException {
     if (args.length != 2) {
@@ -20,14 +20,13 @@ public class MaxTemperatureWithCombiner {
       System.exit(-1);
     }
     
-    JobConf conf = new JobConf(MaxTemperatureWithCombiner.class);
+    JobConf conf = new JobConf(MaxTemperature.class);
     conf.setJobName("Max temperature");
 
     FileInputFormat.addInputPath(conf, new Path(args[0]));
     FileOutputFormat.setOutputPath(conf, new Path(args[1]));
     
     conf.setMapperClass(MaxTemperatureMapper.class);
-    conf.setCombinerClass(MaxTemperatureReducer.class);
     conf.setReducerClass(MaxTemperatureReducer.class);
     
     conf.setOutputKeyClass(Text.class);

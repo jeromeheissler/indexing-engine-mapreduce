@@ -1,4 +1,4 @@
-package fr.univtours.polytech.indexing_engine_mapreduce;
+package fr.univtours.polytech.maxtemperature;
 
 // cc MaxTemperatureMapper Mapper for maximum temperature example
 // vv MaxTemperatureMapper
