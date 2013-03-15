@@ -9,4 +9,4 @@
 .project
 .settings/
 target/
-src/output/
+output/
