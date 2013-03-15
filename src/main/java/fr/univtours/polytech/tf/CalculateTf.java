@@ -1,5 +1,5 @@
-package fr.univtours.polytech.wordcount;
-        
+package fr.univtours.polytech.tf;
+
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.conf.*;
 import org.apache.hadoop.io.*;
@@ -9,15 +9,15 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
         
-public class WordCount {
+public class CalculateTf {
                 
  public static void main(String[] args) throws Exception {
     Configuration conf = new Configuration();
         
-    Job job = new Job(conf, "wordcount");
+    Job job = new Job(conf, "CalculateTf");
     
     job.setOutputKeyClass(Text.class);
-    job.setOutputValueClass(IntWritable.class);
+    job.setOutputValueClass(Text.class);
         
     job.setMapperClass(Map.class);
     job.setReducerClass(Reduce.class);
