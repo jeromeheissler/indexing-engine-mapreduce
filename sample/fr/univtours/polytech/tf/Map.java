@@ -19,7 +19,8 @@ public class Map extends Mapper<LongWritable, Text, Text, Text> {
         System.out.println(value.toString());
         StringTokenizer tokenizer = new StringTokenizer(line);
         while (tokenizer.hasMoreTokens()) {
-            context.write(value, new Text(tokenizer.nextToken()+"-"+1));
+            context.write(new Text(tokenizer.nextToken()), new Text(value+"-"+1+"/"+tokenizer.countTokens()));
         }
+        
     }
 }

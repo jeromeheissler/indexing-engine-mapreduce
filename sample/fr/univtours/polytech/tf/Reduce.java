@@ -13,24 +13,12 @@ public class Reduce extends Reducer<Text, Text, Text, Text> {
 
     public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
     	
-    	HashMap<String, Integer> tmp = new HashMap<String, Integer>();
-    	for(Text map : values)	{
-    		String t = map.toString();
-    		String[] ts = t.split("-");
-    			if(tmp.containsKey(ts[0]))	{
-    				tmp.put(ts[0], tmp.get(ts[0]) + 1);
-    			}else	{
-    				tmp.put(ts[0], 1);
-    			}
-    		
-    	}
-        
-    	String output = "";
-    	for(Entry<String, Integer> t : tmp.entrySet())	{
-    		output += " "+t.getKey()+"-"+t.getValue();
+    	StringBuffer buf = new StringBuffer();
+    	for(Text text : values)	{
+    		buf.append(text.toString()+" ");
     	}
     	
-        context.write(key, new Text(output));
+        context.write(key, new Text(buf.toString()));
     }
 
 }
