@@ -47,8 +47,9 @@ public class IndexMapper extends MapReduceBase implements
 		String sign = extractor.nextToken();
 		while (sign != null) {
 			String signFiltered = IndexJob.filterSign(sign);
-			output.collect(new Text(signFiltered), new Text(fileName));
-			System.out.println(signFiltered);
+			if(signFiltered.compareTo("") != 0)	{
+				output.collect(new Text(signFiltered), new Text(fileName));
+			}
 			sign = extractor.nextToken();
 		}
 

@@ -180,7 +180,7 @@ public class IndexJob implements Callable<String> {
 		// CG_COMBINER_HIDDEN
 
 		// CG_REDUCER_HIDDEN
-		conf.setReducerClass(id.web.arifn.distindexing.mapred.IndexReducer.class);
+		conf.setReducerClass(fr.univtours.polytech.indexing_engine_mapreduce.indevertedindex.mapred.IndexReducer.class);
 
 		// CG_REDUCER
 		conf.setNumReduceTasks(1);

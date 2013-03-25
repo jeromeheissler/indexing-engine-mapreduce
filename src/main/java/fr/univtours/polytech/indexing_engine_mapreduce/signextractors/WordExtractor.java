@@ -34,7 +34,7 @@ public class WordExtractor implements SignExtractor {
   @Override
   public void setContent(final String content) {
 	// On coupe la phrase quand on rencontre un espace ou un caract�re sp�cial
-    items = content.split("[^a-z����������A-Z0-9]+");
+    items = content.split("[^a-zàâéèêîôûùA-Z0-9]+");
     
     // On initialise le curseur � 0
     cursor = 0;

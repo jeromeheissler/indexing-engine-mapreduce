@@ -18,7 +18,6 @@ public class DocSumWritable implements Writable {
 	}
 
 	public DocSumWritable(HashMap<String, Integer> map) {
-
 		this.map = map;
 	}
 
@@ -57,7 +56,7 @@ public class DocSumWritable implements Writable {
 	@Override
 	public String toString() {
 
-		String output = "";
+		String output = "("+map.size()+")\t";
 
 		for (String tag : map.keySet()) {
 			output += (tag + "=>" + getCount(tag).toString() + " ");
