@@ -56,7 +56,7 @@ public class DocSumWritable implements Writable {
 	@Override
 	public String toString() {
 
-		String output = "("+map.size()+")\t";
+		String output = map.size()+"\t";
 
 		for (String tag : map.keySet()) {
 			output += (tag + "=>" + getCount(tag).toString() + " ");

@@ -40,6 +40,7 @@ public class IndexMapper extends MapReduceBase implements
 		String fileName = filesplit.getPath().getName();
 
 		String line = value.toString();
+		System.out.println(line);
 
 		SignExtractor extractor = IndexJob.getSignExtractor();
 		extractor.setContent(line);
