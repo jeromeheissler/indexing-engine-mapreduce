@@ -161,7 +161,7 @@ public class IndexJob implements Callable<String> {
 		conf.setInputFormat(org.apache.hadoop.mapred.TextInputFormat.class);
 
 		// CG_MAPPER_HIDDEN
-		conf.setMapperClass(id.web.arifn.distindexing.mapred.IndexMapper.class);
+		conf.setMapperClass(fr.univtours.polytech.indexing_engine_mapreduce.indevertedindex.mapred.IndexMapper.class);
 
 		// CG_MAPPER
 		conf.setMapOutputKeyClass(org.apache.hadoop.io.Text.class);
