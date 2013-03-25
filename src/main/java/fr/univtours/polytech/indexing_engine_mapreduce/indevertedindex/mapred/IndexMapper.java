@@ -6,7 +6,9 @@
 
 package fr.univtours.polytech.indexing_engine_mapreduce.indevertedindex.mapred;
 
+import fr.univtours.polytech.indexing_engine_mapreduce.indevertedindex.job.IndexJob;
 import fr.univtours.polytech.indexing_engine_mapreduce.indevertedindex.writable.DocSumWritable;
+import fr.univtours.polytech.indexing_engine_mapreduce.signextractors.SignExtractor;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -32,20 +34,22 @@ public class IndexMapper extends MapReduceBase implements
 	// private static final Log LOG = LogFactory.getLog("mapred.IndexMapper");
 
 	@Override
-	public void map(LongWritable key, Text value,
-			OutputCollector<Text, Text> output, Reporter reporter)
-			throws IOException {
+	public void map(LongWritable key, Text value, OutputCollector<Text, Text> output, Reporter reporter) throws IOException {
 
 		FileSplit filesplit = (FileSplit) reporter.getInputSplit();
 		String fileName = filesplit.getPath().getName();
 
 		String line = value.toString();
 
-		StringTokenizer tokenizer = new StringTokenizer(line);
-		while (tokenizer.hasMoreTokens()) {
-			String token = tokenizer.nextToken();
-
-			output.collect(new Text(token.toLowerCase()), new Text(fileName));
+		SignExtractor extractor = IndexJob.getSignExtractor();
+		extractor.setContent(line);
+		
+		String sign = extractor.nextToken();
+		while (sign != null) {
+			String signFiltered = IndexJob.filterSign(sign);
+			output.collect(new Text(signFiltered), new Text(fileName));
+			System.out.println(signFiltered);
+			sign = extractor.nextToken();
 		}
 
 	}

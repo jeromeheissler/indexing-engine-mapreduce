@@ -6,8 +6,11 @@
 
 package fr.univtours.polytech.indexing_engine_mapreduce.indevertedindex.job;
 
+import fr.univtours.polytech.indexing_engine_mapreduce.filter.Filter;
 import fr.univtours.polytech.indexing_engine_mapreduce.indevertedindex.writable.DocSumWritable;
+import fr.univtours.polytech.indexing_engine_mapreduce.signextractors.SignExtractor;
 
+import java.util.List;
 import java.util.concurrent.Callable;
 
 import javax.xml.soap.Text;
@@ -40,6 +43,42 @@ public class IndexJob implements Callable<String> {
 	 * 
 	 * Hint: If you use obscure types, register a PropertyEditor for them.
 	 */
+
+	private static List<Filter> filters;
+
+	public static void setListFilters(List<Filter> filters) {
+		IndexJob.filters = filters;
+	}
+
+	public static String filterSign(final String sign) {
+		if (filters.size() == 0) {
+			return sign;
+		} else {
+			String res = sign;
+			for (int i = 0; i < filters.size(); ++i) {
+				res = filters.get(i).filter(res);
+				if (res == null) {
+					break;
+				}
+			}
+			return res;
+		}
+	}
+
+	private static SignExtractor extractor;
+
+	/**
+	 * Permet d'obtenir l'extracteur de signes associés à la base de données.
+	 * 
+	 * @return l'extracteur de signes
+	 */
+	public static SignExtractor getSignExtractor() {
+		return extractor;
+	}
+
+	public static void setSignExtractor(SignExtractor extractor) {
+		IndexJob.extractor = extractor;
+	}
 
 	private String inputPaths;
 

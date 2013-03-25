@@ -44,9 +44,7 @@ public class IndexReducer extends MapReduceBase implements
 	}
 
 	@Override
-	public void reduce(Text key, Iterator<Text> values,
-			OutputCollector<Text, DocSumWritable> output, Reporter reporter)
-			throws IOException {
+	public void reduce(Text key, Iterator<Text> values, OutputCollector<Text, DocSumWritable> output, Reporter reporter) throws IOException {
 		map = new HashMap<String, Integer>();
 
 		while (values.hasNext()) {
