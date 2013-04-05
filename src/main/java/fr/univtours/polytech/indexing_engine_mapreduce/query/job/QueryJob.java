@@ -1,12 +1,11 @@
 package fr.univtours.polytech.indexing_engine_mapreduce.query.job;
 
-import javax.xml.soap.Text;
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Text.Comparator;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -14,6 +13,9 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
+
+import fr.univtours.polytech.indexing_engine_mapreduce.query.mapred.QueryMapper;
+import fr.univtours.polytech.indexing_engine_mapreduce.query.mapred.QueryReducer;
 
 public class QueryJob extends Configured implements Tool {
 	
@@ -36,16 +38,17 @@ public class QueryJob extends Configured implements Tool {
 		//Getting the number of documents from the original input directory.
         Path inputPath = new Path("input");
 		FileSystem fs = inputPath.getFileSystem(conf);
+		
         FileStatus[] stat = fs.listStatus(inputPath);
         
         runningJob.setInputFormatClass(TextInputFormat.class);
         runningJob.setOutputFormatClass(TextOutputFormat.class);
 	    
-        runningJob.setReducerClass(fr.univtours.polytech.indexing_engine_mapreduce.query.mapred.QueryReducer.class);
-        runningJob.setMapperClass(fr.univtours.polytech.indexing_engine_mapreduce.query.mapred.QueryMapper.class);
+        runningJob.setReducerClass(QueryReducer.class);
+        runningJob.setMapperClass(QueryMapper.class);
 
-        runningJob.setMapOutputKeyClass(org.apache.hadoop.io.Text.class);
-        runningJob.setMapOutputValueClass(org.apache.hadoop.io.Text.class);
+        runningJob.setMapOutputKeyClass(Text.class);
+        runningJob.setMapOutputValueClass(Text.class);
 
 		runningJob.setOutputKeyClass(Comparator.class);
 		     

@@ -1,10 +1,19 @@
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.util.StringUtils;
 import org.apache.hadoop.util.ToolRunner;
 
@@ -22,15 +31,32 @@ import fr.univtours.polytech.indexing_engine_mapreduce.signextractors.SignExtrac
  * 
  */
 public class Main {
-
-	public static void main(String[] args) {
+	
+	public static byte[] toByteArray(char[] array, Charset charset) {
+		CharBuffer cbuf = CharBuffer.wrap(array);
+		ByteBuffer bbuf = charset.encode(cbuf);
+		return bbuf.array();
+	}
+	
+	public static void main(String[] args) throws IOException {
 		if (args.length < 4) {
 			System.out.println("Missing parameter. Correct use it moteurIndexation MODE CONF INPUT OUTPUT [QUERY]");
 			return;
 		}
+		
+		Path pt=new Path(args[1]);
+        FileSystem fs = FileSystem.get(new Configuration());
+        InputStreamReader in = new InputStreamReader(fs.open(pt));
 
+        File f=new File("conf.txt");
+        OutputStream out=new FileOutputStream(f);
+        char buff[]=new char[1024];
+        int len;
+        while((len=in.read(buff))>0)	{
+        	out.write(toByteArray(buff, Charset.defaultCharset()), 0, len);
+        }
 		/* load configuration file */
-		Config conf = ConfigFactory.parseFile(new File(args[1]));
+		Config conf = ConfigFactory.parseFile(f);
 
 		/* load extractor from className */
 		String extractorClassName = conf.getString("extractor");
