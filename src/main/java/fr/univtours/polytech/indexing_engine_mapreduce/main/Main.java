@@ -21,6 +21,11 @@ import fr.univtours.polytech.indexing_engine_mapreduce.signextractors.SignExtrac
 public class Main {
 
 	public static void main(String[] args) {
+		if(args.length < 4)	{
+			System.out.println("Missing parameter. Correct use it moteurIndexation MODE CONF INPUT OUTPUT [QUERY]");
+			return;
+		}
+		
 		/* load configuration file */
 		Config conf = ConfigFactory.parseFile(new File(args[1]));
 
@@ -56,7 +61,7 @@ public class Main {
 				System.out.println("Unable to load filter \""+className+"\", please check configuration file");
 			}
 		}
-
+		
 		if(extract == null)	{
 			System.out.println("Unable to load an extractor");
 			return;
@@ -65,11 +70,10 @@ public class Main {
 			return;
 		}
 		
-		
 		/**
 		 * The job is indexing all file
 		 */
-		if(args[0] == "index")	{		
+		if(args[0].compareTo("index") == 0)	{		
 			IndexJob.setSignExtractor(extract);
 			IndexJob.setListFilters(fil);
 	
@@ -86,7 +90,7 @@ public class Main {
 		/**
 		 * The job is answer to a question
 		 */
-		}else if(args[0] == "question")	{
+		}else if(args[0].compareTo("question") == 0)	{
 
 			/* getting the question tf */
 			String queryQuestion = args[4];
