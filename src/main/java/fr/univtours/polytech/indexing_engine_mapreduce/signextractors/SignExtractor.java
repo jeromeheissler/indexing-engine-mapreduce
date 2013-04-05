@@ -1,21 +1,21 @@
 package fr.univtours.polytech.indexing_engine_mapreduce.signextractors;
 
 /**
- * Interface d�finissant comment extraire des signes � partir d'une cha�ne de
- * caract�res.
- * @author S�bastien Aupetit
+ * Interface definissant comment extraire des signes a partir d'une chaine de
+ * caracteres.
+ * @author Jérôme Heissler & Francois Senist
  */
 public interface SignExtractor {
   /**
    * Permet d'obtenir le signe suivant.
-   * @return le signe ou null s'il n'y a plus de signes � extraire
+   * @return le signe ou null s'il n'y a plus de signes a extraire
    */
   public String nextToken();
 
   /**
-   * Permet de d�finir le cha�ne de caract�res � partir de laquelle les signes
+   * Permet de definir le chaine de caracteres a partir de laquelle les signes
    * seront extraits.
-   * @param content la cha�ne de caract�re
+   * @param content la chaine de caractere
    */
   public void setContent(String content);
 }

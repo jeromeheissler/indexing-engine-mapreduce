@@ -1,8 +1,6 @@
 package fr.univtours.polytech.indexing_engine_mapreduce.main;
 
 import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,14 +8,16 @@ import java.util.List;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
-import fr.univtours.polytech.indexing_engine_mapreduce.filter.AccentFilter;
-import fr.univtours.polytech.indexing_engine_mapreduce.filter.CaseFilter;
 import fr.univtours.polytech.indexing_engine_mapreduce.filter.Filter;
 import fr.univtours.polytech.indexing_engine_mapreduce.indevertedindex.job.IndexJob;
 import fr.univtours.polytech.indexing_engine_mapreduce.query.job.QueryJob;
 import fr.univtours.polytech.indexing_engine_mapreduce.signextractors.SignExtractor;
-import fr.univtours.polytech.indexing_engine_mapreduce.signextractors.WordExtractor;
 
+/**
+ * 
+ * @author Jérôme Heissler & Francois Senis
+ *
+ */
 public class Main {
 
 	public static void main(String[] args) {

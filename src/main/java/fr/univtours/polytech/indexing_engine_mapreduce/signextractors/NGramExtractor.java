@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe permettant d'extraite des N-grams � partir d'une cha�ne de caract�res.
- * @author S�bastien Aupetit
+ * Classe permettant d'extraite des N-grams a partir d'une chaine de caracteres.
+ * @author Jérôme Heissler & Francois Senis
  */
 public class NGramExtractor implements SignExtractor {
 
@@ -21,13 +21,9 @@ public class NGramExtractor implements SignExtractor {
    n = size;
   }
 
-  /**
-   * {@inheritDoc}
-   * @see fr.univtours.polytech.di.multimedia.signextractors.SignExtractor#nextToken()
-   */
   @Override
   public String nextToken() {
-	  // Si on est � la fin du mot
+	  // Si on est a la fin du mot
 	  if(cursor == items.size())
 		  return null;
 	  // Sinon on retourne le prochain 'bloc'
@@ -37,22 +33,18 @@ public class NGramExtractor implements SignExtractor {
 		}
   }
 
-  /**
-   * {@inheritDoc}
-   * @see fr.univtours.polytech.di.multimedia.signextractors.SignExtractor#setContent(java.lang.String)
-   */
   @Override
   public void setContent(final String content) {
     items = new ArrayList<String>();
     int i = 0;
     
-    // Tant que l'on est pas � la fin du mot
+    // Tant que l'on est pas a la fin du mot
     while((i+n)<=content.length())	{
-    	// On ajoute � la liste le prochain 'bloc'
+    	// On ajoute a la liste le prochain 'bloc'
     	items.add(content.substring(i, i+n));
     	i++;
     }
-    // On initialise le curseur � 0
+    // On initialise le curseur a 0
 	cursor = 0;
   }
 }

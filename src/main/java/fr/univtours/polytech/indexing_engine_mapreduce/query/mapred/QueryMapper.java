@@ -11,7 +11,11 @@ import org.apache.hadoop.mapred.Reporter;
 
 import fr.univtours.polytech.indexing_engine_mapreduce.query.job.QueryJob;
 
-
+/**
+ * 
+ * @author Jérôme Heissler & Francois Senis
+ *
+ */
 public class QueryMapper extends MapReduceBase implements Mapper<LongWritable, Text, Text, Text> {
 
 	@Override

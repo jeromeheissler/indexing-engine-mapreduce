@@ -11,19 +11,16 @@ import fr.univtours.polytech.indexing_engine_mapreduce.indevertedindex.writable.
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
-// import org.apache.commons.logging.Log;
-// import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.mapred.MapReduceBase;
 import org.apache.hadoop.mapred.OutputCollector;
 import org.apache.hadoop.mapred.Reducer;
 import org.apache.hadoop.mapred.Reporter;
 
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 
 /**
  * 
- * @author arifn
+ * @author Jérôme Heissler & Francois Senis
  */
 public class IndexReducer extends MapReduceBase implements
 		Reducer<Text, Text, Text, DocSumWritable> {
@@ -44,7 +41,9 @@ public class IndexReducer extends MapReduceBase implements
 	}
 
 	@Override
-	public void reduce(Text key, Iterator<Text> values, OutputCollector<Text, DocSumWritable> output, Reporter reporter) throws IOException {
+	public void reduce(Text key, Iterator<Text> values,
+			OutputCollector<Text, DocSumWritable> output, Reporter reporter)
+			throws IOException {
 		map = new HashMap<String, Integer>();
 
 		while (values.hasNext()) {

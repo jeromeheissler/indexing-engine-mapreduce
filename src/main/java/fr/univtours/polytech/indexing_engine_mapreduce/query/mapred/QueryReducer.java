@@ -9,9 +9,12 @@ import org.apache.hadoop.mapred.OutputCollector;
 import org.apache.hadoop.mapred.Reducer;
 import org.apache.hadoop.mapred.Reporter;
 
-import fr.univtours.polytech.indexing_engine_mapreduce.indevertedindex.job.IndexJob;
 import fr.univtours.polytech.indexing_engine_mapreduce.query.job.QueryJob;
 
+/**
+ * 
+ * @author Jérôme Heissler & Francois Senis
+ */
 public class QueryReducer extends MapReduceBase implements Reducer<Text, Text, Text, Text> {
 
 
