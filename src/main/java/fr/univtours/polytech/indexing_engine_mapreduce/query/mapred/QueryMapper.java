@@ -4,32 +4,22 @@ import java.io.IOException;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.MapReduceBase;
-import org.apache.hadoop.mapred.Mapper;
-import org.apache.hadoop.mapred.OutputCollector;
-import org.apache.hadoop.mapred.Reporter;
-
-import fr.univtours.polytech.indexing_engine_mapreduce.query.job.QueryJob;
+import org.apache.hadoop.mapreduce.Mapper;
 
 /**
  * 
  * @author Jérôme Heissler & Francois Senis
  *
  */
-public class QueryMapper extends MapReduceBase implements Mapper<LongWritable, Text, Text, Text> {
+public class QueryMapper extends Mapper<LongWritable, Text, Text, Text> {
 
-	@Override
-	public void map(LongWritable key, Text value, OutputCollector<Text, Text> output, Reporter reporter) throws IOException {
-
+	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 		String line = value.toString();
-
 		String[] content = line.split("\t");
 		String[] lstDoc = content[2].split(" ");
 		for(String s : lstDoc)	{
 			String[] keyVal = s.split("=>");
-			QueryJob.documents.add(keyVal[0]);
-			output.collect(new Text(keyVal[0]), new Text(content[0]+"-"+content[1]+"-"+keyVal[1]));
-		}
-		
+			context.write(new Text(keyVal[0]), new Text(content[0]+"-"+content[1]+"-"+keyVal[1]));
+		}		
 	}
 }
