@@ -1,12 +1,7 @@
 #! /bin/bash
 #on verifie le nombre d'argument
 if [ $# == 3 ]; 
-then 
-#on verifie si le fichier output n'existe pas deja sinon on le supprime
-if [ -d $3 ];
 then
-rm -r $3/*;
-fi
 
 # Get the input data
 declare INPUT=$2;
@@ -14,9 +9,15 @@ declare OUTPUT=$3;
 declare CONFIG=$1;
 
 export HADOOP_HOME=/usr/local/hadoop
+#on verifie si le fichier output n'existe pas deja sinon on le supprime
+
+if [ -d $3 ];
+then
+${HADOOP_HOME}/bin/hadoop fs -rmr $OUTPUT >& /dev/null
+fi
 
 # Execute the jobs
-printf "\nExecuting Job 1: Word Frequency in Doc\n"
+printf "\nExecuting Job 1: create iverted index\n"
 ${HADOOP_HOME}/bin/hadoop jar moteurIndexation.jar index $CONFIG $INPUT $OUTPUT
 
 else
