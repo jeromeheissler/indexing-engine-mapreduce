@@ -2,31 +2,31 @@ package fr.univtours.polytech.indexing_engine_mapreduce.filter;
 
 
 /**
- * Classe de filtrage impl�mentant un filtre de mots vides.
- * @author S�bastien Aupetit
+ * Classe de filtrage implementant un filtre de mots vides.
+ * @author Jérôme Heissler & François Senis
  */
 public class StopWordFilter implements Filter {
 
-	// Cr�ation d'une liste stop words
+	// Creation d'une liste stop words
 	public static String[] stopWordFr = {
-		    "a","alors","au","aucuns","aussi","autre","avant","avec","avoir","�","aux",
+		    "a","alors","au","aucuns","aussi","autre","avant","avec","avoir","à","aux",
 		    "bon",
-		    "c","car","ce","cela","ces","ceux","chaque","ci","co","comme","comment","�a","c1",//"cest",
-		    "d","dans","de","des","du","dedans","dehors","depuis","deux","devrait","doit","donc","dos","droite","d�but",
-		    "elle","elles","en","encore","essai","est","et","eu","�taient","�tat","�tions","�t�","�tre",
+		    "c","car","ce","cela","ces","ceux","chaque","ci","co","comme","comment","ça","c1",//"cest",
+		    "d","dans","de","des","du","dedans","dehors","depuis","deux","devrait","doit","donc","dos","droite","début",
+		    "elle","elles","en","encore","essai","est","et","eu","étaient","état","étions","été","être",
 		    "fait","faites","fois","font","force",
 		    "haut","hors","http",
 		    "ici","il","ils",
 		    "je", "juste",
-		    "l","la","le","les","leur","l�",
-		    "ma","maintenant","mais","mes","mine","moins","mon","mot","m�me",
-		    "ni","nomm�s","notre","nous","nouveaux","ne",
-		    "ou","o�",
-		    "par","parce","parole","pas","personnes","peut","peu","pi�ce","plupart","pour","pourquoi",
+		    "l","la","le","les","leur","là",
+		    "ma","maintenant","mais","mes","mine","moins","mon","mot","même",
+		    "ni","nommés","notre","nous","nouveaux","ne",
+		    "ou","où",
+		    "par","parce","parole","pas","personnes","peut","peu","pièce","plupart","pour","pourquoi",
 		    "quand","que","quel","quelle","quelles","quels","qui",
 		    "rt",
 		    "s", "sa","sans","se","ses","seulement","si","sien","son","sont","sous","soyez", "sujet","sur",
-		    "t","ta","tandis","tellement","tels","tes","ton","tous","tout","trop","tr�s","tu",
+		    "t","ta","tandis","tellement","tels","tes","ton","tous","tout","trop","trés","tu",
 		    "un","une",
 		    "valeur","voie","voient","vont","votre","vous","vu",
 		    "www" };
@@ -36,9 +36,9 @@ public class StopWordFilter implements Filter {
 	
   /**
    * Le constructeur.
-   * @param caseFilterApplied indique si les signes ont �t� filtr�s en minuscule
-   * @param accentFilterApplied indique si les signes ont �t� filtr�s sans
-   *          accent et sans caract�res sp�ciaux
+   * @param caseFilterApplied indique si les signes ont ete filtres en minuscule
+   * @param accentFilterApplied indique si les signes ont ete filtres sans
+   *          accent et sans caracteres speciaux
    */
   public StopWordFilter(final boolean caseFilterApplied,
       final boolean accentFilterApplied) {
@@ -46,21 +46,18 @@ public class StopWordFilter implements Filter {
     this.accentFilterApplied = accentFilterApplied;
   }
 
-  /**
-   * {@inheritDoc}
-   * @see fr.univtours.polytech.di.multimedia.filters.Filter#filter(java.lang.String)
-   */
+  
   @Override
   public String filter(final String sign) {
 	String s = sign;
 	// On parcourt la liste des stop words
 	for(String fr : stopWordFr)	{
-		// Si le mot est pr�sent, on le remplace par une cha�ne vide
-		/* [^a-z����������A-Z] = aucun des caract�res entre crochet */
+		// Si le mot est present, on le remplace par une chaine vide
+		/* [^a-éèàêëîïùôöçüûA-Z] = aucun des caracteres entre crochet */
 		s = s.replaceFirst("^"+fr+"$", "");
-		s = s.replaceFirst("^"+fr+"[^a-z����������A-Z0-9]", "");
-	    s = s.replaceFirst("[^a-z����������A-Z0-9]"+fr+"$", "");
-	    s = s.replaceAll("[^a-z����������A-Z0-9]"+fr+"[^a-z����������A-Z0-9]", " ");
+		s = s.replaceFirst("^"+fr+"[^a-zéèàêëîïùôöçüûA-Z0-9]", "");
+	    s = s.replaceFirst("[^a-zéèàêëîïùôöçüûA-Z0-9]"+fr+"$", "");
+	    s = s.replaceAll("[^a-zéèàêëîïùôöçüûA-Z0-9]"+fr+"[^a-zéèàêëîïùôöçüûA-Z0-9]", " ");
 	}
 	return s;
   }

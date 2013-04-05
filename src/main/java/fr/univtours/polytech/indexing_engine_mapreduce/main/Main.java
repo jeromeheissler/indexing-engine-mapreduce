@@ -10,6 +10,11 @@ import fr.univtours.polytech.indexing_engine_mapreduce.indevertedindex.job.Index
 import fr.univtours.polytech.indexing_engine_mapreduce.query.job.QueryJob;
 import fr.univtours.polytech.indexing_engine_mapreduce.signextractors.WordExtractor;
 
+/**
+ * 
+ * @author Jérôme Heissler & Francois Senis
+ *
+ */
 public class Main {
 
 	public static void main(String[] args) {

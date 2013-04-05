@@ -9,6 +9,10 @@ import org.apache.hadoop.mapred.OutputCollector;
 import org.apache.hadoop.mapred.Reducer;
 import org.apache.hadoop.mapred.Reporter;
 
+/**
+ * 
+ * @author Jérôme Heissler & Francois Senis
+ */
 public class QueryReducer extends MapReduceBase implements Reducer<Text, Text, Text, Text> {
 
 

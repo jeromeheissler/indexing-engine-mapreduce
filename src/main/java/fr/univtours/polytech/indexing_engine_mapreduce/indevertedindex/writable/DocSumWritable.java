@@ -10,6 +10,10 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 
+/**
+ * 
+ * @author Jérôme Heissler & Francois Senis
+ */
 public class DocSumWritable implements Writable {
 
 	private HashMap<String, Integer> map = new HashMap<String, Integer>();
@@ -42,8 +46,6 @@ public class DocSumWritable implements Writable {
 	@Override
 	public void write(DataOutput out) throws IOException {
 		Iterator<String> it = map.keySet().iterator();
-		Text tag = new Text();
-		IntWritable count = new IntWritable();
 
 		while (it.hasNext()) {
 			String t = it.next();
