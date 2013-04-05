@@ -1,5 +1,7 @@
 package fr.univtours.polytech.indexing_engine_mapreduce.query.job;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -13,6 +15,14 @@ import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapred.RunningJob;
 
 public class QueryJob implements Callable<String> {
+	public static HashSet<String> documents = new HashSet<String>();
+	
+	public static HashMap<String, Double> question;
+	
+	public QueryJob(HashMap<String, Double> question)	{
+		QueryJob.question = question;
+	}
+	
 	private String inputPaths;
 
 	public void setInputPaths(String inputPaths) {

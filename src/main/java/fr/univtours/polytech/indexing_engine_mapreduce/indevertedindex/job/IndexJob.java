@@ -10,6 +10,7 @@ import fr.univtours.polytech.indexing_engine_mapreduce.filter.Filter;
 import fr.univtours.polytech.indexing_engine_mapreduce.indevertedindex.writable.DocSumWritable;
 import fr.univtours.polytech.indexing_engine_mapreduce.signextractors.SignExtractor;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.Callable;
 

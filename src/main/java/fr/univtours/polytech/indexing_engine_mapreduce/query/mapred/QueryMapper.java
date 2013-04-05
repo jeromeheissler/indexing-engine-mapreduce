@@ -9,6 +9,8 @@ import org.apache.hadoop.mapred.Mapper;
 import org.apache.hadoop.mapred.OutputCollector;
 import org.apache.hadoop.mapred.Reporter;
 
+import fr.univtours.polytech.indexing_engine_mapreduce.query.job.QueryJob;
+
 
 public class QueryMapper extends MapReduceBase implements Mapper<LongWritable, Text, Text, Text> {
 
@@ -21,7 +23,8 @@ public class QueryMapper extends MapReduceBase implements Mapper<LongWritable, T
 		String[] lstDoc = content[2].split(" ");
 		for(String s : lstDoc)	{
 			String[] keyVal = s.split("=>");
-			output.collect(new Text(keyVal[0]), new Text(content[1]+"-"+keyVal[1]));
+			QueryJob.documents.add(keyVal[0]);
+			output.collect(new Text(keyVal[0]), new Text(content[0]+"-"+content[1]+"-"+keyVal[1]));
 		}
 		
 	}
