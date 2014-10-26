@@ -49,7 +49,6 @@ public class QueryReducer extends Reducer<Text, Text, Text, Text> {
 				
 				/* calcule de la norme de la question */
 				normeQuestion = normeQuestion + Math.pow(tfidfQuestion,2);
-				
 				/* calcule du produit scalaire */
 				scalaire = scalaire + (tfidf*tfidfQuestion);
 			}

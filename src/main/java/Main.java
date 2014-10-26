@@ -154,7 +154,7 @@ public class Main {
 			
 			String question = StringUtils.join(",", item);					
 			
-			String[] arg = {args[2], args[3]};
+			String[] arg = {args[2], args[3], args[5]};
 			try {
 				ToolRunner.run(new Configuration(), new QueryJob(question), arg);
 			} catch (Exception e) {

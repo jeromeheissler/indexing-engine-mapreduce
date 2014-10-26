@@ -36,7 +36,7 @@ public class QueryJob extends Configured implements Tool {
 		FileOutputFormat.setOutputPath(runningJob, new Path(args[1]));
 		
 		//Getting the number of documents from the original input directory.
-        Path inputPath = new Path("input");
+        Path inputPath = new Path(args[2]);
 		FileSystem fs = inputPath.getFileSystem(conf);
 		
         FileStatus[] stat = fs.listStatus(inputPath);

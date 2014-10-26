@@ -1,0 +1,5 @@
+
+extractor="fr.univtours.polytech.indexing_engine_mapreduce.signextractors.WordExtractor"
+#extractor="fr.univtours.polytech.indexing_engine_mapreduce.signextractors.NGramExtractor-3"
+
+filter=["fr.univtours.polytech.indexing_engine_mapreduce.filter.CaseFilter","fr.univtours.polytech.indexing_engine_mapreduce.filter.AccentFilter"]
